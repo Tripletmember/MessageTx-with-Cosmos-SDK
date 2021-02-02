@@ -1,13 +1,13 @@
 package integration
 
 import (
-	msg_sdk "github.com/kaifei-bianjie/msg-parser"
+	msg_parser "github.com/kaifei-bianjie/msg-parser"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )
 
 type IntegrationTestSuite struct {
-	msg_sdk.MsgClient
+	msg_parser.MsgClient
 	suite.Suite
 }
 
@@ -21,5 +21,5 @@ func TestSuite(t *testing.T) {
 }
 
 func (s *IntegrationTestSuite) SetupSuite() {
-	s.MsgClient = msg_sdk.NewMsgClient()
+	s.MsgClient = msg_parser.NewMsgClient()
 }

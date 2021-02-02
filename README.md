@@ -23,7 +23,7 @@ The initialization SDK code is as follows:
 
 ```go
 
-client := msg_sdk.NewMsgClient()
+client := msg_parser.NewMsgClient()
 ```
 
 parse Bank Msg of Tx 
@@ -39,7 +39,7 @@ use in sync
 
 var (
 	docTx models.Tx
-	docTxMsgs []msg_sdk.DocTxMsg
+	docTxMsgs []msg_parser.DocTxMsg
     	)
 	authTx := Tx.(signing.Tx)
 	......
