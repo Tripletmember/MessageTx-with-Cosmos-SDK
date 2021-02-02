@@ -1,4 +1,4 @@
-package msg_sdk
+package msg_parser
 
 import (
 	"github.com/kaifei-bianjie/msg-parser/codec"
