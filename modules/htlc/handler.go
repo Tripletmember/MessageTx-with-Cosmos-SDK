@@ -21,9 +21,6 @@ func (htlc htlcClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
 	case new(MsgCreateHTLC).Type():
 		docMsg := DocTxMsgCreateHTLC{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgRefundHTLC).Type():
-		docMsg := DocTxMsgRefundHTLC{}
-		return docMsg.HandleTxMsg(msg), ok
 	default:
 		ok = false
 	}

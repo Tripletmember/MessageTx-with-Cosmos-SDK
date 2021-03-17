@@ -197,7 +197,6 @@ type (
 
 	MsgClaimHTLC  = htlc.MsgClaimHTLC
 	MsgCreateHTLC = htlc.MsgCreateHTLC
-	MsgRefundHTLC = htlc.MsgRefundHTLC
 
 	MsgSubmitEvidence  = evidence.MsgSubmitEvidence
 	MsgVerifyInvariant = crisis.MsgVerifyInvariant
