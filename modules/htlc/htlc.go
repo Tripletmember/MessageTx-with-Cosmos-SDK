@@ -10,10 +10,12 @@ type DocTxMsgCreateHTLC struct {
 	Sender               string        `bson:"sender"`                  // the initiator address
 	To                   string        `bson:"to"`                      // the destination address
 	ReceiverOnOtherChain string        `bson:"receiver_on_other_chain"` // the claim receiving address on the other chain
-	Amount               []models.Coin `bson:"amount"`                  // the amount to be transferred
-	HashLock             string        `bson:"hash_lock"`               // the hash lock generated from secret (and timestamp if provided)
-	Timestamp            uint64        `bson:"timestamp"`               // if provided, used to generate the hash lock together with secret
-	TimeLock             uint64        `bson:"time_lock"`               // the time span after which the HTLC will expire
+	SenderOnOtherChain   string        `bson:"sender_on_other_chain"`
+	Amount               []models.Coin `bson:"amount"`    // the amount to be transferred
+	HashLock             string        `bson:"hash_lock"` // the hash lock generated from secret (and timestamp if provided)
+	Timestamp            uint64        `bson:"timestamp"` // if provided, used to generate the hash lock together with secret
+	TimeLock             uint64        `bson:"time_lock"` // the time span after which the HTLC will expire
+	Transfer             bool          `bson:"transfer"`
 }
 
 func (doctx *DocTxMsgCreateHTLC) GetType() string {
@@ -29,6 +31,8 @@ func (doctx *DocTxMsgCreateHTLC) BuildMsg(txMsg interface{}) {
 	doctx.HashLock = msg.HashLock
 	doctx.TimeLock = msg.TimeLock
 	doctx.ReceiverOnOtherChain = msg.ReceiverOnOtherChain
+	doctx.SenderOnOtherChain = msg.SenderOnOtherChain
+	doctx.Transfer = msg.Transfer
 }
 
 func (m *DocTxMsgCreateHTLC) HandleTxMsg(v sdk.Msg) MsgDocInfo {
@@ -48,9 +52,9 @@ func (m *DocTxMsgCreateHTLC) HandleTxMsg(v sdk.Msg) MsgDocInfo {
 }
 
 type DocTxMsgClaimHTLC struct {
-	Sender   string `bson:"sender"`    // the initiator address
-	HashLock string `bson:"hash_lock"` // the hash lock identifying the HTLC to be claimed
-	Secret   string `bson:"secret"`    // the secret with which to claim
+	Sender string `bson:"sender"` // the initiator address
+	Id     string `bson:"id"`     // the id identifying the HTLC to be claimed
+	Secret string `bson:"secret"` // the secret with which to claim
 }
 
 func (doctx *DocTxMsgClaimHTLC) GetType() string {
@@ -61,7 +65,7 @@ func (doctx *DocTxMsgClaimHTLC) BuildMsg(txMsg interface{}) {
 	msg := txMsg.(*MsgClaimHTLC)
 	doctx.Sender = msg.Sender
 	doctx.Secret = msg.Secret
-	doctx.HashLock = msg.HashLock
+	doctx.Id = msg.Id
 }
 
 func (m *DocTxMsgClaimHTLC) HandleTxMsg(v sdk.Msg) MsgDocInfo {
@@ -69,37 +73,6 @@ func (m *DocTxMsgClaimHTLC) HandleTxMsg(v sdk.Msg) MsgDocInfo {
 	var (
 		addrs []string
 		msg   MsgClaimHTLC
-	)
-
-	ConvertMsg(v, &msg)
-	addrs = append(addrs, msg.Sender)
-	handler := func() (Msg, []string) {
-		return m, addrs
-	}
-
-	return CreateMsgDocInfo(v, handler)
-}
-
-type DocTxMsgRefundHTLC struct {
-	Sender   string `bson:"sender"`    // the initiator address
-	HashLock string `bson:"hash_lock"` // the hash lock identifying the HTLC to be refunded
-}
-
-func (doctx *DocTxMsgRefundHTLC) GetType() string {
-	return MsgTypeRefundHTLC
-}
-
-func (doctx *DocTxMsgRefundHTLC) BuildMsg(txMsg interface{}) {
-	msg := txMsg.(*MsgRefundHTLC)
-	doctx.Sender = msg.Sender
-	doctx.HashLock = msg.HashLock
-}
-
-func (m *DocTxMsgRefundHTLC) HandleTxMsg(v sdk.Msg) MsgDocInfo {
-
-	var (
-		addrs []string
-		msg   MsgRefundHTLC
 	)
 
 	ConvertMsg(v, &msg)

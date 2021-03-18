@@ -13,7 +13,6 @@ type (
 		Input             string       `bson:"input"`
 		ServiceFeeCap     models.Coins `bson:"service_fee_cap"`
 		Timeout           int64        `bson:"timeout"`
-		SuperMode         bool         `bson:"super_mode"`
 		Repeated          bool         `bson:"repeated"`
 		RepeatedFrequency uint64       `bson:"repeated_frequency"`
 		RepeatedTotal     int64        `bson:"repeated_total"`
@@ -34,7 +33,6 @@ func (m *DocMsgCallService) BuildMsg(msg interface{}) {
 	m.ServiceFeeCap = models.BuildDocCoins(v.ServiceFeeCap)
 	m.Timeout = v.Timeout
 	//m.Input = hex.EncodeToString(v.Input)
-	m.SuperMode = v.SuperMode
 	m.Repeated = v.Repeated
 	m.RepeatedFrequency = v.RepeatedFrequency
 	m.RepeatedTotal = v.RepeatedTotal
