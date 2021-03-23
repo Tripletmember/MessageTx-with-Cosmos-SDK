@@ -1,13 +1,14 @@
 package token
 
 import (
+	"fmt"
 	. "github.com/kaifei-bianjie/msg-parser/modules"
 )
 
 // MsgBurnToken defines an SDK message for burning some tokens.
 type DocMsgBurnToken struct {
 	Symbol string `bson:"symbol"`
-	Amount uint64 `bson:"amount"`
+	Amount string `bson:"amount"`
 	Sender string `bson:"sender"`
 }
 
@@ -19,7 +20,7 @@ func (m *DocMsgBurnToken) BuildMsg(v interface{}) {
 	msg := v.(*MsgBurnToken)
 
 	m.Symbol = msg.Symbol
-	m.Amount = msg.Amount
+	m.Amount = fmt.Sprint(msg.Amount)
 	m.Sender = msg.Sender
 }
 
