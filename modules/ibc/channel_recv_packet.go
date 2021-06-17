@@ -1,11 +1,13 @@
 package ibc
 
 import (
+	"fmt"
 	. "github.com/kaifei-bianjie/msg-parser/modules"
 	"github.com/kaifei-bianjie/msg-parser/utils"
 )
 
 type DocMsgRecvPacket struct {
+	PacketId        string `bson:"packet_id"`
 	Packet          Packet `bson:"packet"`
 	ProofCommitment string `bson:"proof_commitment"`
 	ProofHeight     Height `bson:"proof_height"`
@@ -22,6 +24,8 @@ func (m *DocMsgRecvPacket) BuildMsg(v interface{}) {
 	m.ProofHeight = loadHeight(msg.ProofHeight)
 	m.ProofCommitment = utils.MarshalJsonIgnoreErr(msg.ProofCommitment)
 	m.Packet = loadPacket(msg.Packet)
+	m.PacketId = fmt.Sprintf("%v%v%v%v%v", msg.Packet.SourcePort, msg.Packet.SourceChannel,
+		msg.Packet.DestinationPort, msg.Packet.DestinationChannel, msg.Packet.Sequence)
 
 }
 

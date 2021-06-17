@@ -7,6 +7,7 @@ import (
 )
 
 type DocMsgTransfer struct {
+	PacketId         string      `bson:"packet_id"`
 	SourcePort       string      `bson:"source_port"`
 	SourceChannel    string      `bson:"source_channel"`
 	Token            models.Coin `bson:"token"`
