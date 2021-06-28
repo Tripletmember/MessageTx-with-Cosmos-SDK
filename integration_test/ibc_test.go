@@ -4,6 +4,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"github.com/kaifei-bianjie/msg-parser/codec"
+	"github.com/kaifei-bianjie/msg-parser/modules/ibc"
 	"github.com/kaifei-bianjie/msg-parser/utils"
 )
 
@@ -12,6 +13,10 @@ func (s IntegrationTestSuite) TestIbc() {
 		{
 			"CreateClient",
 			CreateClient,
+		},
+		{
+			"GetIbcPacketDenom",
+			GetIbcPacketDenom,
 		},
 	}
 
@@ -36,4 +41,57 @@ func CreateClient(s IntegrationTestSuite) {
 			fmt.Println(utils.MarshalJsonIgnoreErr(bankDoc))
 		}
 	}
+}
+
+func GetIbcPacketDenom(s IntegrationTestSuite) {
+	packet := ibc.Packet{
+		SourcePort:         "transfer",
+		SourceChannel:      "channel-9",
+		DestinationPort:    "transfer",
+		DestinationChannel: "channel-1",
+		Data: ibc.PacketData{
+			Denom:  "transfer/channel-9/umuon",
+			Amount: 1,
+		},
+	}
+
+	fmt.Println("Atom Iris => Cosmos: ", ibc.GetIbcPacketDenom(packet, packet.Data.Denom))
+	packet = ibc.Packet{
+		SourcePort:         "transfer",
+		SourceChannel:      "channel-9",
+		DestinationPort:    "transfer",
+		DestinationChannel: "channel-1",
+		Data: ibc.PacketData{
+			Denom:  "unyan",
+			Amount: 1,
+		},
+	}
+
+	fmt.Println("Iris Iris => Cosmos: ", ibc.GetIbcPacketDenom(packet, packet.Data.Denom))
+
+	packet = ibc.Packet{
+		SourcePort:         "transfer",
+		SourceChannel:      "channel-1",
+		DestinationPort:    "transfer",
+		DestinationChannel: "channel-9",
+		Data: ibc.PacketData{
+			Denom:  "umuon",
+			Amount: 1,
+		},
+	}
+
+	fmt.Println("Atom Cosmos => Iris: ", ibc.GetIbcPacketDenom(packet, packet.Data.Denom))
+	packet = ibc.Packet{
+		SourcePort:         "transfer",
+		SourceChannel:      "channel-1",
+		DestinationPort:    "transfer",
+		DestinationChannel: "channel-9",
+		Data: ibc.PacketData{
+			Denom:  "transfer/channel-1/unyan",
+			Amount: 1,
+		},
+	}
+
+	fmt.Println("Iris Cosmos => Iris: ", ibc.GetIbcPacketDenom(packet, packet.Data.Denom))
+
 }
