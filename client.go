@@ -8,6 +8,7 @@ import (
 	"github.com/kaifei-bianjie/msg-parser/modules/crisis"
 	"github.com/kaifei-bianjie/msg-parser/modules/distribution"
 	"github.com/kaifei-bianjie/msg-parser/modules/evidence"
+	"github.com/kaifei-bianjie/msg-parser/modules/farm"
 	"github.com/kaifei-bianjie/msg-parser/modules/gov"
 	"github.com/kaifei-bianjie/msg-parser/modules/htlc"
 	"github.com/kaifei-bianjie/msg-parser/modules/ibc"
@@ -43,6 +44,7 @@ type MsgClient struct {
 	Htlc         htlc.Client
 	Record       record.Client
 	Coinswap     coinswap.Client
+	Farm         farm.Client
 	//Wasm         wasm.Client
 }
 
@@ -68,6 +70,7 @@ func NewMsgClient() MsgClient {
 		Htlc:         htlc.NewClient(),
 		Token:        token.NewClient(),
 		Coinswap:     coinswap.NewClient(),
+		Farm:         farm.NewClient(),
 		//Wasm:         wasm.NewClient(),
 	}
 }
