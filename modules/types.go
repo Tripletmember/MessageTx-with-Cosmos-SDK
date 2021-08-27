@@ -16,6 +16,7 @@ import (
 	slashing "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stake "github.com/cosmos/cosmos-sdk/x/staking/types"
 	coinswap "github.com/irisnet/irismod/modules/coinswap/types"
+	farm "github.com/irisnet/irismod/modules/farm/types"
 	htlc "github.com/irisnet/irismod/modules/htlc/types"
 	nft "github.com/irisnet/irismod/modules/nft/types"
 	oracle "github.com/irisnet/irismod/modules/oracle/types"
@@ -27,14 +28,22 @@ import (
 )
 
 const (
-	MsgTypeSend         = "send"
-	MsgTypeMultiSend    = "multisend"
-	MsgTypeNFTMint      = "mint_nft"
-	MsgTypeNFTEdit      = "edit_nft"
-	MsgTypeNFTTransfer  = "transfer_nft"
-	MsgTypeNFTBurn      = "burn_nft"
-	MsgTypeIssueDenom   = "issue_denom"
-	MsgTypeRecordCreate = "create_record"
+	MsgTypeSend          = "send"
+	MsgTypeMultiSend     = "multisend"
+	MsgTypeNFTMint       = "mint_nft"
+	MsgTypeNFTEdit       = "edit_nft"
+	MsgTypeNFTTransfer   = "transfer_nft"
+	MsgTypeTransferDenom = "transfer_denom"
+	MsgTypeNFTBurn       = "burn_nft"
+	MsgTypeIssueDenom    = "issue_denom"
+	MsgTypeRecordCreate  = "create_record"
+
+	MsgTypeCreatePool  = "create_pool"
+	MsgTypeDestroyPool = "destroy_pool"
+	MsgTypeAdjustPool  = "adjust_pool"
+	MsgTypeStake       = "stake"
+	MsgTypeUnstake     = "unstake"
+	MsgTypeHarvest     = "harvest"
 
 	MsgTypeMintToken          = "mint_token"
 	MsgTypeBurnToken          = "burn_token"
@@ -139,11 +148,19 @@ type (
 	MsgSend      = bank.MsgSend
 	MsgMultiSend = bank.MsgMultiSend
 
-	MsgNFTMint     = nft.MsgMintNFT
-	MsgNFTEdit     = nft.MsgEditNFT
-	MsgNFTTransfer = nft.MsgTransferNFT
-	MsgNFTBurn     = nft.MsgBurnNFT
-	MsgIssueDenom  = nft.MsgIssueDenom
+	MsgNFTMint       = nft.MsgMintNFT
+	MsgNFTEdit       = nft.MsgEditNFT
+	MsgNFTTransfer   = nft.MsgTransferNFT
+	MsgNFTBurn       = nft.MsgBurnNFT
+	MsgIssueDenom    = nft.MsgIssueDenom
+	MsgTransferDenom = nft.MsgTransferDenom
+
+	MsgUnstake     = farm.MsgUnstake
+	MsgStake       = farm.MsgStake
+	MsgCreatePool  = farm.MsgCreatePool
+	MsgDestroyPool = farm.MsgDestroyPool
+	MsgAdjustPool  = farm.MsgAdjustPool
+	MsgHarvest     = farm.MsgHarvest
 
 	MsgDefineService  = service.MsgDefineService
 	MsgBindService    = service.MsgBindService

@@ -30,6 +30,9 @@ func (nft nftClient) HandleTxMsg(msg types.Msg) (MsgDocInfo, bool) {
 	case new(MsgIssueDenom).Type():
 		docMsg := DocMsgIssueDenom{}
 		return docMsg.HandleTxMsg(msg), true
+	case new(MsgTransferDenom).Type():
+		docMsg := DocMsgTransferDenom{}
+		return docMsg.HandleTxMsg(msg), true
 	}
 	return MsgDocInfo{}, false
 }
