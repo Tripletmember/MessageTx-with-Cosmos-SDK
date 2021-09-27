@@ -1,6 +1,9 @@
 package msgs
 
 import (
+	tibctranfer "github.com/bianjieai/tibc-go/modules/tibc/apps/nft_transfer/types"
+	tibcclient "github.com/bianjieai/tibc-go/modules/tibc/core/02-client/types"
+	tibcpacket "github.com/bianjieai/tibc-go/modules/tibc/core/04-packet/types"
 	//"github.com/CosmWasm/wasmd/x/wasm"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
@@ -130,6 +133,13 @@ const (
 	MsgTypeInstantiateContract = "instantiate"
 	MsgTypeMigrateContract     = "migrate"
 	MsgTypeStoreCode           = "store_code"
+
+	MsgTypeTIBCNftTransfer     = "tibc_nft_transfer"
+	MsgTypeTIBCRecvPacket      = "tibc_recv_packet"
+	MsgTypeTIBCUpdateClient    = "tibc_update_client"
+	MsgTypeTIBCAcknowledgement = "tibc_acknowledge_packet"
+	MsgTypeTIBCCleanPacket     = "clean_packet"
+	MsgTypeTIBCRecvCleanPacket = "recv_clean_packet"
 )
 
 type (
@@ -255,4 +265,11 @@ type (
 	//MsgMigrateContract     = wasm.MsgMigrateContract
 	//MsgUpdateAdmin         = wasm.MsgUpdateAdmin
 	//MsgClearAdmin          = wasm.MsgClearAdmin
+	NonFungibleTokenPacketData = tibctranfer.NonFungibleTokenPacketData
+	MsgTIBCNftTransfer         = tibctranfer.MsgNftTransfer
+	MsgTIBCUpdateClient        = tibcclient.MsgUpdateClient
+	MsgTIBCRecvPacket          = tibcpacket.MsgRecvPacket
+	MsgTIBCAcknowledgement     = tibcpacket.MsgAcknowledgement
+	MsgCleanPacket             = tibcpacket.MsgCleanPacket
+	MsgRecvCleanPacket         = tibcpacket.MsgRecvCleanPacket
 )
