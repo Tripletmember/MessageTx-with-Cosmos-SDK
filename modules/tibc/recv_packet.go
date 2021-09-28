@@ -1,7 +1,6 @@
 package tibc
 
 import (
-	"fmt"
 	cdc "github.com/kaifei-bianjie/msg-parser/codec"
 	. "github.com/kaifei-bianjie/msg-parser/modules"
 	"github.com/kaifei-bianjie/msg-parser/utils"
@@ -46,12 +45,14 @@ func (m *DocMsgTIBCRecvPacket) HandleTxMsg(v SdkMsg) MsgDocInfo {
 func UnmarshalPacketData(bytesdata []byte) PacketData {
 	var (
 		packetData NonFungibleTokenPacketData
-		data       PacketData
 	)
-	err := cdc.GetMarshaler().UnmarshalJSON(bytesdata, &packetData)
-	if err != nil {
-		fmt.Println(err.Error())
+	cdc.GetMarshaler().MustUnmarshalBinaryBare(bytesdata, &packetData)
+	return PacketData{
+		Class:          packetData.Class,
+		Receiver:       packetData.Receiver,
+		Sender:         packetData.Sender,
+		Id:             packetData.Id,
+		Uri:            packetData.Uri,
+		AwayFromOrigin: packetData.AwayFromOrigin,
 	}
-	utils.UnMarshalJsonIgnoreErr(utils.MarshalJsonIgnoreErr(packetData), &data)
-	return data
 }

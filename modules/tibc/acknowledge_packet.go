@@ -33,7 +33,6 @@ func (m *DocMsgTIBCAcknowledgement) HandleTxMsg(v SdkMsg) MsgDocInfo {
 		msg   MsgTIBCAcknowledgement
 	)
 
-	utils.UnMarshalJsonIgnoreErr(utils.MarshalJsonIgnoreErr(v), &msg)
 	packetData := UnmarshalPacketData(msg.Packet.GetData())
 	addrs = append(addrs, msg.Signer, packetData.Receiver, packetData.Sender)
 	handler := func() (Msg, []string) {
