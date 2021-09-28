@@ -30,6 +30,14 @@ type PacketData struct {
 	AwayFromOrigin bool   `bson:"away_from_origin"`
 }
 
+// CleanPacket defines a type that carries data across different chains through TIBC
+type CleanPacket struct {
+	Sequence         uint64 `bson:"sequence"`
+	SourceChain      string `bson:"source_chain"`
+	DestinationChain string `bson:"destination_chain"`
+	RelayChain       string `bson:"relay_chain"`
+}
+
 func loadHeight(height tibcclient.Height) Height {
 	return Height{
 		RevisionNumber: height.RevisionNumber,
@@ -44,5 +52,14 @@ func loadPacket(packet tibcpacket.Packet) Packet {
 		DestinationChain: packet.DestinationChain,
 		RelayChain:       packet.RelayChain,
 		Data:             UnmarshalPacketData(packet.GetData()),
+	}
+}
+
+func loadCleanPacket(packet tibcpacket.CleanPacket) CleanPacket {
+	return CleanPacket{
+		Sequence:         packet.Sequence,
+		SourceChain:      packet.SourceChain,
+		DestinationChain: packet.DestinationChain,
+		RelayChain:       packet.RelayChain,
 	}
 }

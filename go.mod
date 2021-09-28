@@ -3,7 +3,7 @@ module github.com/kaifei-bianjie/msg-parser
 go 1.15
 
 require (
-	github.com/bianjieai/tibc-go v0.1.0
+	github.com/bianjieai/tibc-go v0.1.1-0.20210927072059-3ba9aae768ac
 	github.com/cosmos/cosmos-sdk v0.42.9
 	github.com/irisnet/irismod v1.4.1-0.20210823104253-0ea3c0d8e1c4
 	github.com/stretchr/testify v1.7.0

@@ -6,8 +6,8 @@ import (
 )
 
 type DocMsgCleanPacket struct {
-	Packet Packet `bson:"packet"`
-	Signer string `bson:"signer"`
+	CleanPacket CleanPacket `bson:"clean_packet"`
+	Signer      string      `bson:"signer"`
 }
 
 func (m *DocMsgCleanPacket) GetType() string {
@@ -17,7 +17,7 @@ func (m *DocMsgCleanPacket) GetType() string {
 func (m *DocMsgCleanPacket) BuildMsg(v interface{}) {
 	msg := v.(*MsgCleanPacket)
 	m.Signer = msg.Signer
-	m.Packet = loadPacket(msg.Packet)
+	m.CleanPacket = loadCleanPacket(msg.CleanPacket)
 }
 
 func (m *DocMsgCleanPacket) HandleTxMsg(v SdkMsg) MsgDocInfo {
@@ -27,8 +27,7 @@ func (m *DocMsgCleanPacket) HandleTxMsg(v SdkMsg) MsgDocInfo {
 	)
 
 	utils.UnMarshalJsonIgnoreErr(utils.MarshalJsonIgnoreErr(v), &msg)
-	packetData := UnmarshalPacketData(msg.Packet.GetData())
-	addrs = append(addrs, msg.Signer, packetData.Receiver, packetData.Sender)
+	addrs = append(addrs, msg.Signer)
 	handler := func() (Msg, []string) {
 		return m, addrs
 	}
