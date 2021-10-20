@@ -10,7 +10,7 @@ type DocMsgTimeoutOnClose struct {
 	ProofUnreceived  string `bson:"proof_unreceived"`
 	ProofClose       string `bson:"proof_close"`
 	ProofHeight      Height `bson:"proof_height"`
-	NextSequenceRecv uint64 `bson:"next_sequence_recv"`
+	NextSequenceRecv int64  `bson:"next_sequence_recv"`
 	Signer           string `bson:"signer"`
 }
 
@@ -21,7 +21,7 @@ func (m *DocMsgTimeoutOnClose) GetType() string {
 func (m *DocMsgTimeoutOnClose) BuildMsg(v interface{}) {
 	msg := v.(*MsgTimeoutOnClose)
 	m.Signer = msg.Signer
-	m.NextSequenceRecv = msg.NextSequenceRecv
+	m.NextSequenceRecv = int64(msg.NextSequenceRecv)
 	m.ProofUnreceived = utils.MarshalJsonIgnoreErr(m.ProofUnreceived)
 	m.ProofClose = utils.MarshalJsonIgnoreErr(m.ProofClose)
 	m.Packet = loadPacket(msg.Packet)

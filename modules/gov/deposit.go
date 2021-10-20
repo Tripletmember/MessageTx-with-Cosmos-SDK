@@ -7,7 +7,7 @@ import (
 
 // MsgDeposit
 type DocTxMsgDeposit struct {
-	ProposalID uint64        `bson:"proposal_id"` // ID of the proposal
+	ProposalID int64         `bson:"proposal_id"` // ID of the proposal
 	Depositor  string        `bson:"depositor"`   // Address of the depositor
 	Amount     []models.Coin `bson:"amount"`      // Coins to add to the proposal's deposit
 }
@@ -20,7 +20,7 @@ func (doctx *DocTxMsgDeposit) BuildMsg(txMsg interface{}) {
 	msg := txMsg.(*MsgDeposit)
 	doctx.Depositor = msg.Depositor
 	doctx.Amount = models.BuildDocCoins(msg.Amount)
-	doctx.ProposalID = msg.ProposalId
+	doctx.ProposalID = int64(msg.ProposalId)
 }
 
 func (m *DocTxMsgDeposit) HandleTxMsg(v SdkMsg) MsgDocInfo {

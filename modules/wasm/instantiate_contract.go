@@ -12,7 +12,7 @@ package wasm
 //	// Admin is an optional address that can execute migrations
 //	Admin string `bson:"admin"`
 //	// CodeID is the reference to the stored WASM code
-//	CodeID uint64 `bson:"code_id"`
+//	CodeID int64 `bson:"code_id"`
 //	// Label is optional metadata to be stored with a contract instance.
 //	Label string `bson:"label"`
 //	// InitMsg json encoded message to be passed to the contract on instantiation

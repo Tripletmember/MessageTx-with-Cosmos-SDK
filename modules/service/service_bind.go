@@ -10,7 +10,7 @@ type (
 		Provider    string `bson:"provider"`
 		Deposit     Coins  `bson:"deposit"`
 		Pricing     string `bson:"pricing"`
-		QoS         uint64 `bson:"qos"`
+		QoS         int64  `bson:"qos"`
 		Owner       string `bson:"owner"`
 		Options     string `bson:"options"`
 	}
@@ -31,7 +31,7 @@ func (m *DocMsgBindService) BuildMsg(v interface{}) {
 	m.Provider = msg.Provider
 	m.Deposit = coins
 	m.Pricing = msg.Pricing
-	m.QoS = msg.QoS
+	m.QoS = int64(msg.QoS)
 	m.Owner = msg.Owner
 	m.Options = msg.Options
 }
