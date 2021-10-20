@@ -11,7 +11,7 @@ package wasm
 //	// Contract is the address of the smart contract
 //	Contract string `bson:"contract"`
 //	// CodeID references the new WASM code
-//	CodeID uint64 `bson:"code_id"`
+//	CodeID int64 `bson:"code_id"`
 //	// MigrateMsg json encoded message to be passed to the contract on migration
 //	MigrateMsg string `bson:"migrate_msg"`
 //}

@@ -11,7 +11,7 @@ type DocMsgConnectionOpenTry struct {
 	PreviousConnectionId string       `bson:"previous_connection_id"`
 	ClientState          string       `bson:"client_state"`
 	Counterparty         Counterparty `bson:"counterparty"`
-	DelayPeriod          uint64       `bson:"delay_period"`
+	DelayPeriod          int64        `bson:"delay_period"`
 	CounterpartyVersions []Version    `bson:"counterparty_versions"`
 	ProofHeight          Height       `bson:"proof_height"`
 	ProofInit            string       `bson:"proof_init"`
@@ -45,7 +45,7 @@ func (m *DocMsgConnectionOpenTry) BuildMsg(v interface{}) {
 	m.Signer = msg.Signer
 	m.ClientId = msg.ClientId
 	m.PreviousConnectionId = msg.PreviousConnectionId
-	m.DelayPeriod = msg.DelayPeriod
+	m.DelayPeriod = int64(msg.DelayPeriod)
 	m.ClientState = ConvertAny(msg.ClientState)
 	m.ProofInit = utils.MarshalJsonIgnoreErr(msg.ProofInit)
 	m.ProofClient = utils.MarshalJsonIgnoreErr(msg.ProofClient)

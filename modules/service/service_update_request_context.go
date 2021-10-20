@@ -13,7 +13,7 @@ type (
 		Consumer          string        `bson:"consumer" yaml:"consumer"`
 		ServiceFeeCap     []models.Coin `bson:"service_fee_cap" yaml:"service_fee_cap"`
 		Timeout           int64         `bson:"timeout" yaml:"timeout"`
-		RepeatedFrequency uint64        `bson:"repeated_frequency" yaml:"repeated_frequency"`
+		RepeatedFrequency int64         `bson:"repeated_frequency" yaml:"repeated_frequency"`
 		RepeatedTotal     int64         `bson:"repeated_total" yaml:"repeated_total"`
 	}
 )
@@ -35,7 +35,7 @@ func (m *DocMsgUpdateRequestContext) BuildMsg(v interface{}) {
 	m.Consumer = msg.Consumer
 	m.ServiceFeeCap = coins
 	m.Timeout = msg.Timeout
-	m.RepeatedFrequency = msg.RepeatedFrequency
+	m.RepeatedFrequency = int64(msg.RepeatedFrequency)
 	m.RepeatedTotal = msg.RepeatedTotal
 }
 

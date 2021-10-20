@@ -14,7 +14,7 @@ type DocMsgTransfer struct {
 	Sender           string      `bson:"sender"`
 	Receiver         string      `bson:"receiver"`
 	TimeoutHeight    Height      `bson:"timeout_height"`
-	TimeoutTimestamp uint64      `bson:"timeout_timestamp"`
+	TimeoutTimestamp int64       `bson:"timeout_timestamp"`
 }
 
 func (m *DocMsgTransfer) GetType() string {
@@ -27,7 +27,7 @@ func (m *DocMsgTransfer) BuildMsg(v interface{}) {
 	m.SourceChannel = msg.SourceChannel
 	m.Sender = msg.Sender
 	m.Receiver = msg.Receiver
-	m.TimeoutTimestamp = msg.TimeoutTimestamp
+	m.TimeoutTimestamp = int64(msg.TimeoutTimestamp)
 	m.TimeoutHeight = loadHeight(msg.TimeoutHeight)
 	m.Token = models.BuildDocCoin(msg.Token)
 }

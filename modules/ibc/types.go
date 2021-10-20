@@ -11,13 +11,13 @@ import (
 
 func loadPacket(packet icorechannel.Packet) Packet {
 	return Packet{
-		Sequence:           packet.Sequence,
+		Sequence:           int64(packet.Sequence),
 		SourcePort:         packet.SourcePort,
 		SourceChannel:      packet.SourceChannel,
 		DestinationPort:    packet.DestinationPort,
 		DestinationChannel: packet.DestinationChannel,
 		Data:               UnmarshalPacketData(packet.GetData()),
-		TimeoutTimestamp:   packet.TimeoutTimestamp,
+		TimeoutTimestamp:   int64(packet.TimeoutTimestamp),
 		TimeoutHeight:      loadHeight(packet.TimeoutHeight)}
 }
 
@@ -36,8 +36,8 @@ func UnmarshalPacketData(bytesdata []byte) PacketData {
 
 func loadHeight(height icoreclient.Height) Height {
 	return Height{
-		RevisionNumber: height.RevisionNumber,
-		RevisionHeight: height.RevisionHeight}
+		RevisionNumber: int64(height.RevisionNumber),
+		RevisionHeight: int64(height.RevisionHeight)}
 }
 
 func loadChannel(channel icorechannel.Channel) Channel {
@@ -66,26 +66,26 @@ type ChannelCounterparty struct {
 }
 
 type Height struct {
-	RevisionNumber uint64 `bson:"revision_number"`
-	RevisionHeight uint64 `bson:"revision_height"`
+	RevisionNumber int64 `bson:"revision_number"`
+	RevisionHeight int64 `bson:"revision_height"`
 }
 
 // Packet defines a type that carries data across different chains through IBC
 type Packet struct {
-	Sequence           uint64     `bson:"sequence"`
+	Sequence           int64      `bson:"sequence"`
 	SourcePort         string     `bson:"source_port"`
 	SourceChannel      string     `bson:"source_channel"`
 	DestinationPort    string     `bson:"destination_port"`
 	DestinationChannel string     `bson:"destination_channel"`
 	Data               PacketData `bson:"data"`
 	TimeoutHeight      Height     `bson:"timeout_height"`
-	TimeoutTimestamp   uint64     `bson:"timeout_timestamp"`
+	TimeoutTimestamp   int64      `bson:"timeout_timestamp"`
 }
 
 //FungibleTokenPacketData
 type PacketData struct {
 	Denom    string `bson:"denom" json:"denom"`
-	Amount   uint64 `bson:"amount" json:"amount"`
+	Amount   int64  `bson:"amount" json:"amount"`
 	Sender   string `bson:"sender" json:"sender"`
 	Receiver string `bson:"receiver" json:"receiver"`
 }

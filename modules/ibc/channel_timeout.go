@@ -11,7 +11,7 @@ type DocMsgTimeout struct {
 	Packet           Packet `bson:"packet"`
 	ProofUnreceived  string `bson:"proof_unreceived"`
 	ProofHeight      Height `bson:"proof_height"`
-	NextSequenceRecv uint64 `bson:"next_sequence_recv"`
+	NextSequenceRecv int64  `bson:"next_sequence_recv"`
 	Signer           string `bson:"signer"`
 }
 
@@ -22,7 +22,7 @@ func (m *DocMsgTimeout) GetType() string {
 func (m *DocMsgTimeout) BuildMsg(v interface{}) {
 	msg := v.(*MsgTimeout)
 	m.Signer = msg.Signer
-	m.NextSequenceRecv = msg.NextSequenceRecv
+	m.NextSequenceRecv = int64(msg.NextSequenceRecv)
 	m.ProofUnreceived = utils.MarshalJsonIgnoreErr(msg.ProofUnreceived)
 	m.Packet = loadPacket(msg.Packet)
 	m.ProofHeight = loadHeight(msg.ProofHeight)

@@ -7,7 +7,7 @@ import (
 
 // Packet defines a type that carries data across different chains through IBC
 type Packet struct {
-	Sequence         uint64     `bson:"sequence"`
+	Sequence         int64      `bson:"sequence"`
 	Port             string     `bson:"port"`
 	SourceChain      string     `bson:"source_chain"`
 	DestinationChain string     `bson:"destination_chain"`
@@ -16,8 +16,8 @@ type Packet struct {
 }
 
 type Height struct {
-	RevisionNumber uint64 `bson:"revision_number"`
-	RevisionHeight uint64 `bson:"revision_height"`
+	RevisionNumber int64 `bson:"revision_number"`
+	RevisionHeight int64 `bson:"revision_height"`
 }
 
 //NonFungibleTokenPacketData
@@ -32,7 +32,7 @@ type PacketData struct {
 
 // CleanPacket defines a type that carries data across different chains through TIBC
 type CleanPacket struct {
-	Sequence         uint64 `bson:"sequence"`
+	Sequence         int64  `bson:"sequence"`
 	SourceChain      string `bson:"source_chain"`
 	DestinationChain string `bson:"destination_chain"`
 	RelayChain       string `bson:"relay_chain"`
@@ -40,13 +40,13 @@ type CleanPacket struct {
 
 func loadHeight(height tibcclient.Height) Height {
 	return Height{
-		RevisionNumber: height.RevisionNumber,
-		RevisionHeight: height.RevisionHeight}
+		RevisionNumber: int64(height.RevisionNumber),
+		RevisionHeight: int64(height.RevisionHeight)}
 }
 
 func loadPacket(packet tibcpacket.Packet) Packet {
 	return Packet{
-		Sequence:         packet.Sequence,
+		Sequence:         int64(packet.Sequence),
 		Port:             packet.Port,
 		SourceChain:      packet.SourceChain,
 		DestinationChain: packet.DestinationChain,
@@ -57,7 +57,7 @@ func loadPacket(packet tibcpacket.Packet) Packet {
 
 func loadCleanPacket(packet tibcpacket.CleanPacket) CleanPacket {
 	return CleanPacket{
-		Sequence:         packet.Sequence,
+		Sequence:         int64(packet.Sequence),
 		SourceChain:      packet.SourceChain,
 		DestinationChain: packet.DestinationChain,
 		RelayChain:       packet.RelayChain,
