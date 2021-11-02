@@ -12,13 +12,13 @@ func NewClient() Client {
 	return randomClient{}
 }
 
-func (random randomClient) HandleTxMsg(msgData sdk.Msg) (MsgDocInfo, bool) {
+func (random randomClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msgData.Type() {
-	case new(MsgRequestRandom).Type():
+	switch msg := v.(type) {
+	case *MsgRequestRandom:
 
 		txMsg := DocTxMsgRequestRand{}
-		return txMsg.HandleTxMsg(msgData), ok
+		return txMsg.HandleTxMsg(msg), ok
 	default:
 		ok = false
 	}

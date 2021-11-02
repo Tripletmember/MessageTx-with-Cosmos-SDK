@@ -12,10 +12,10 @@ func NewClient() Client {
 	return crisisClient{}
 }
 
-func (crisis crisisClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
+func (crisis crisisClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgVerifyInvariant).Type():
+	switch msg := v.(type) {
+	case *MsgVerifyInvariant:
 		docMsg := DocMsgVerifyInvariant{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

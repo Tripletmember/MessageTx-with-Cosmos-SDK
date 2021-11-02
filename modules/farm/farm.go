@@ -12,25 +12,25 @@ func NewClient() Client {
 	return farmClient{}
 }
 
-func (farm farmClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
+func (farm farmClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgCreatePool).Type():
+	switch msg := v.(type) {
+	case *MsgCreatePool:
 		docMsg := DocTxMsgCreatePool{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgDestroyPool).Type():
+	case *MsgDestroyPool:
 		docMsg := DocTxMsgDestroyPool{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgAdjustPool).Type():
+	case *MsgAdjustPool:
 		docMsg := DocTxMsgAdjustPool{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgHarvest).Type():
+	case *MsgHarvest:
 		docMsg := DocTxMsgHarvest{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgStake).Type():
+	case *MsgStake:
 		docMsg := DocTxMsgStake{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgUnstake).Type():
+	case *MsgUnstake:
 		docMsg := DocTxMsgUnstake{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

@@ -3,6 +3,7 @@ package msgs
 import (
 	"github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	cdc "github.com/kaifei-bianjie/msg-parser/codec"
 	models "github.com/kaifei-bianjie/msg-parser/types"
 	"github.com/kaifei-bianjie/msg-parser/utils"
 )
@@ -40,6 +41,20 @@ func ConvertMsg(v interface{}, msg interface{}) {
 func ConvertAny(v *types.Any) string {
 	if v != nil {
 		return utils.MarshalJsonIgnoreErr(v)
+	}
+	return ""
+}
+
+func UnmarshalAcknowledgement(bytesdata []byte) string {
+	var result Acknowledgement
+	cdc.GetMarshaler().MustUnmarshalJSON(bytesdata, &result)
+	return result.String()
+}
+
+func UnmarshalTibcAcknowledgement(bytesdata []byte) string {
+	var result TIBCAcknowledgement
+	if err := cdc.GetMarshaler().Unmarshal(bytesdata, &result); err == nil {
+		return result.String()
 	}
 	return ""
 }

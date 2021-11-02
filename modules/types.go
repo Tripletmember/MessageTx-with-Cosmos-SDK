@@ -1,6 +1,9 @@
 package msgs
 
 import (
+	tibctranfer "github.com/bianjieai/tibc-go/modules/tibc/apps/nft_transfer/types"
+	tibcclient "github.com/bianjieai/tibc-go/modules/tibc/core/02-client/types"
+	tibcpacket "github.com/bianjieai/tibc-go/modules/tibc/core/04-packet/types"
 	//"github.com/CosmWasm/wasmd/x/wasm"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
@@ -8,13 +11,13 @@ import (
 	distribution "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	evidence "github.com/cosmos/cosmos-sdk/x/evidence/types"
 	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
-	ibctransfer "github.com/cosmos/cosmos-sdk/x/ibc/applications/transfer/types"
-	ibcclient "github.com/cosmos/cosmos-sdk/x/ibc/core/02-client/types"
-	ibcconnect "github.com/cosmos/cosmos-sdk/x/ibc/core/03-connection/types"
-	ibc "github.com/cosmos/cosmos-sdk/x/ibc/core/04-channel/types"
-	ibcchannel "github.com/cosmos/cosmos-sdk/x/ibc/core/04-channel/types"
 	slashing "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stake "github.com/cosmos/cosmos-sdk/x/staking/types"
+	ibctransfer "github.com/cosmos/ibc-go/modules/apps/transfer/types"
+	ibcclient "github.com/cosmos/ibc-go/modules/core/02-client/types"
+	ibcconnect "github.com/cosmos/ibc-go/modules/core/03-connection/types"
+	ibc "github.com/cosmos/ibc-go/modules/core/04-channel/types"
+	ibcchannel "github.com/cosmos/ibc-go/modules/core/04-channel/types"
 	coinswap "github.com/irisnet/irismod/modules/coinswap/types"
 	farm "github.com/irisnet/irismod/modules/farm/types"
 	htlc "github.com/irisnet/irismod/modules/htlc/types"
@@ -239,6 +242,7 @@ type (
 	MsgConnectionOpenConfirm = ibcconnect.MsgConnectionOpenConfirm
 	MsgConnectionOpenTry     = ibcconnect.MsgConnectionOpenTry
 
+	Acknowledgement        = ibc.Acknowledgement
 	MsgChannelOpenInit     = ibcchannel.MsgChannelOpenInit
 	MsgChannelOpenTry      = ibcchannel.MsgChannelOpenTry
 	MsgChannelOpenAck      = ibcchannel.MsgChannelOpenAck
@@ -262,4 +266,12 @@ type (
 	//MsgMigrateContract     = wasm.MsgMigrateContract
 	//MsgUpdateAdmin         = wasm.MsgUpdateAdmin
 	//MsgClearAdmin          = wasm.MsgClearAdmin
+	TIBCAcknowledgement        = tibcpacket.Acknowledgement
+	NonFungibleTokenPacketData = tibctranfer.NonFungibleTokenPacketData
+	MsgTIBCNftTransfer         = tibctranfer.MsgNftTransfer
+	MsgTIBCUpdateClient        = tibcclient.MsgUpdateClient
+	MsgTIBCRecvPacket          = tibcpacket.MsgRecvPacket
+	MsgTIBCAcknowledgement     = tibcpacket.MsgAcknowledgement
+	MsgCleanPacket             = tibcpacket.MsgCleanPacket
+	MsgRecvCleanPacket         = tibcpacket.MsgRecvCleanPacket
 )

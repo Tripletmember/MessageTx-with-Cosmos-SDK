@@ -17,14 +17,14 @@ func (bank bankClient) HandleTxMsg(v types.Msg) (MsgDocInfo, bool) {
 		msgDocInfo MsgDocInfo
 	)
 	ok := true
-	switch v.Type() {
-	case new(MsgSend).Type():
+	switch msg := v.(type) {
+	case *MsgSend:
 		docMsg := DocMsgSend{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
+		msgDocInfo = docMsg.HandleTxMsg(msg)
 		break
-	case new(MsgMultiSend).Type():
+	case *MsgMultiSend:
 		docMsg := DocMsgMultiSend{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
+		msgDocInfo = docMsg.HandleTxMsg(msg)
 		break
 	default:
 		ok = false

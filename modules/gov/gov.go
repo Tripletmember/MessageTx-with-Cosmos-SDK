@@ -12,16 +12,16 @@ func NewClient() Client {
 	return govClient{}
 }
 
-func (gov govClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
+func (gov govClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgSubmitProposal).Type():
+	switch msg := v.(type) {
+	case *MsgSubmitProposal:
 		docMsg := DocTxMsgSubmitProposal{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgVote).Type():
+	case *MsgVote:
 		docMsg := DocTxMsgVote{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgDeposit).Type():
+	case *MsgDeposit:
 		docMsg := DocTxMsgDeposit{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

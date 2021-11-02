@@ -12,19 +12,19 @@ func NewClient() Client {
 	return distributionClient{}
 }
 
-func (distribution distributionClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
+func (distribution distributionClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgStakeSetWithdrawAddress).Type():
+	switch msg := v.(type) {
+	case *MsgStakeSetWithdrawAddress:
 		docMsg := DocTxMsgSetWithdrawAddress{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgWithdrawDelegatorReward).Type():
+	case *MsgWithdrawDelegatorReward:
 		docMsg := DocTxMsgWithdrawDelegatorReward{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgWithdrawValidatorCommission).Type():
+	case *MsgWithdrawValidatorCommission:
 		docMsg := DocTxMsgWithdrawValidatorCommission{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgFundCommunityPool).Type():
+	case *MsgFundCommunityPool:
 		docMsg := DocTxMsgFundCommunityPool{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

@@ -12,25 +12,25 @@ func NewClient() Client {
 	return nftClient{}
 }
 
-func (nft nftClient) HandleTxMsg(msg types.Msg) (MsgDocInfo, bool) {
+func (nft nftClient) HandleTxMsg(v types.Msg) (MsgDocInfo, bool) {
 
-	switch msg.Type() {
-	case new(MsgNFTMint).Type():
+	switch msg := v.(type) {
+	case *MsgNFTMint:
 		docMsg := DocMsgNFTMint{}
 		return docMsg.HandleTxMsg(msg), true
-	case new(MsgNFTEdit).Type():
+	case *MsgNFTEdit:
 		docMsg := DocMsgNFTEdit{}
 		return docMsg.HandleTxMsg(msg), true
-	case new(MsgNFTTransfer).Type():
+	case *MsgNFTTransfer:
 		docMsg := DocMsgNFTTransfer{}
 		return docMsg.HandleTxMsg(msg), true
-	case new(MsgNFTBurn).Type():
+	case *MsgNFTBurn:
 		docMsg := DocMsgNFTBurn{}
 		return docMsg.HandleTxMsg(msg), true
-	case new(MsgIssueDenom).Type():
+	case *MsgIssueDenom:
 		docMsg := DocMsgIssueDenom{}
 		return docMsg.HandleTxMsg(msg), true
-	case new(MsgTransferDenom).Type():
+	case *MsgTransferDenom:
 		docMsg := DocMsgTransferDenom{}
 		return docMsg.HandleTxMsg(msg), true
 	}

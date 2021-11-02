@@ -17,10 +17,10 @@ func (record recordClient) HandleTxMsg(v types.Msg) (MsgDocInfo, bool) {
 		msgDocInfo MsgDocInfo
 	)
 	ok := true
-	switch v.Type() {
-	case new(MsgRecordCreate).Type():
+	switch msg := v.(type) {
+	case *MsgRecordCreate:
 		docMsg := DocMsgRecordCreate{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
+		msgDocInfo = docMsg.HandleTxMsg(msg)
 		break
 	default:
 		ok = false
