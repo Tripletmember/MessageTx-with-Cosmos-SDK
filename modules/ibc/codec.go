@@ -1,8 +1,8 @@
 package ibc
 
 import (
-	ibctransfer "github.com/cosmos/cosmos-sdk/x/ibc/applications/transfer"
-	ibc "github.com/cosmos/cosmos-sdk/x/ibc/core"
+	ibctransfer "github.com/cosmos/ibc-go/modules/apps/transfer"
+	ibc "github.com/cosmos/ibc-go/modules/core"
 	"github.com/kaifei-bianjie/msg-parser/codec"
 )
 

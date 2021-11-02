@@ -12,20 +12,20 @@ func NewClient() Client {
 	return oracleClient{}
 }
 
-func (oracle oracleClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
+func (oracle oracleClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 
 	ok := true
-	switch msg.Type() {
-	case new(MsgStartFeed).Type():
+	switch msg := v.(type) {
+	case *MsgStartFeed:
 		docMsg := DocMsgStartFeed{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgPauseFeed).Type():
+	case *MsgPauseFeed:
 		docMsg := DocMsgPauseFeed{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgEditFeed).Type():
+	case *MsgEditFeed:
 		docMsg := DocMsgEditFeed{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgCreateFeed).Type():
+	case *MsgCreateFeed:
 		docMsg := DocMsgCreateFeed{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

@@ -12,28 +12,28 @@ func NewClient() Client {
 	return serviceClient{}
 }
 
-func (service serviceClient) HandleTxMsg(msg types.Msg) (MsgDocInfo, bool) {
+func (service serviceClient) HandleTxMsg(v types.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgDefineService).Type():
+	switch msg := v.(type) {
+	case *MsgDefineService:
 		docMsg := DocMsgDefineService{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgBindService).Type():
+	case *MsgBindService:
 		docMsg := DocMsgBindService{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgCallService).Type():
+	case *MsgCallService:
 		docMsg := DocMsgCallService{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgRespondService).Type():
+	case *MsgRespondService:
 		docMsg := DocMsgServiceResponse{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgUpdateServiceBinding).Type():
+	case *MsgUpdateServiceBinding:
 		docMsg := DocMsgUpdateServiceBinding{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgSetWithdrawAddress).Type():
+	case *MsgSetWithdrawAddress:
 		docMsg := DocMsgSetWithdrawAddress{}
 		msgData := MsgSetWithdrawAddress{}
 		ConvertMsg(msg, &msgData)
@@ -42,35 +42,35 @@ func (service serviceClient) HandleTxMsg(msg types.Msg) (MsgDocInfo, bool) {
 		}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgDisableServiceBinding).Type():
+	case *MsgDisableServiceBinding:
 		docMsg := DocMsgDisableServiceBinding{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgEnableServiceBinding).Type():
+	case *MsgEnableServiceBinding:
 		docMsg := DocMsgEnableServiceBinding{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgRefundServiceDeposit).Type():
+	case *MsgRefundServiceDeposit:
 		docMsg := DocMsgRefundServiceDeposit{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgUpdateRequestContext).Type():
+	case *MsgUpdateRequestContext:
 		docMsg := DocMsgUpdateRequestContext{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgPauseRequestContext).Type():
+	case *MsgPauseRequestContext:
 		docMsg := DocMsgPauseRequestContext{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgStartRequestContext).Type():
+	case *MsgStartRequestContext:
 		docMsg := DocMsgStartRequestContext{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgKillRequestContext).Type():
+	case *MsgKillRequestContext:
 		docMsg := DocMsgKillRequestContext{}
 		return docMsg.HandleTxMsg(msg), ok
 
-	case new(MsgWithdrawEarnedFees).Type():
+	case *MsgWithdrawEarnedFees:
 		docMsg := DocMsgWithdrawEarnedFees{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

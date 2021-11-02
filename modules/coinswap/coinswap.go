@@ -12,16 +12,16 @@ func NewClient() Client {
 	return coinswapClient{}
 }
 
-func (coinswap coinswapClient) HandleTxMsg(msg types.Msg) (MsgDocInfo, bool) {
+func (coinswap coinswapClient) HandleTxMsg(v types.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgAddLiquidity).Type():
+	switch msg := v.(type) {
+	case *MsgAddLiquidity:
 		docMsg := DocTxMsgAddLiquidity{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgRemoveLiquidity).Type():
+	case *MsgRemoveLiquidity:
 		docMsg := DocTxMsgRemoveLiquidity{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgSwapOrder).Type():
+	case *MsgSwapOrder:
 		docMsg := DocTxMsgSwapOrder{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

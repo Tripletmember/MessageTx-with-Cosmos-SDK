@@ -12,10 +12,10 @@ func NewClient() Client {
 	return slashingClient{}
 }
 
-func (slashing slashingClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
+func (slashing slashingClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgUnjail).Type():
+	switch msg := v.(type) {
+	case *MsgUnjail:
 		docMsg := DocTxMsgUnjail{}
 		return docMsg.HandleTxMsg(msg), ok
 

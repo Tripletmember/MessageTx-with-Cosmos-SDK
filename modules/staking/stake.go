@@ -12,22 +12,22 @@ func NewClient() Client {
 	return stakingClient{}
 }
 
-func (staking stakingClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
+func (staking stakingClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgBeginRedelegate).Type():
+	switch msg := v.(type) {
+	case *MsgBeginRedelegate:
 		docMsg := DocTxMsgBeginRedelegate{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgStakeBeginUnbonding).Type():
+	case *MsgStakeBeginUnbonding:
 		docMsg := DocTxMsgBeginUnbonding{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgStakeDelegate).Type():
+	case *MsgStakeDelegate:
 		docMsg := DocTxMsgDelegate{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgStakeEdit).Type():
+	case *MsgStakeEdit:
 		docMsg := DocMsgEditValidator{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgStakeCreate).Type():
+	case *MsgStakeCreate:
 		docMsg := DocTxMsgCreateValidator{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

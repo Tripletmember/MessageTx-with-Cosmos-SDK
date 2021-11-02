@@ -15,3 +15,7 @@ type (
 
 	SdkMsg types.Msg
 )
+
+func MsgTypeURL(msg SdkMsg) string {
+	return types.MsgTypeURL(msg)
+}

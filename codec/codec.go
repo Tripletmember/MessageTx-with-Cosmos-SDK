@@ -42,7 +42,7 @@ func GetTxDecoder() sdk.TxDecoder {
 	return encodecfg.TxConfig.TxDecoder()
 }
 
-func GetMarshaler() codec.Marshaler {
+func GetMarshaler() codec.Codec {
 	return encodecfg.Marshaler
 }
 

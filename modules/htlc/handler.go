@@ -12,13 +12,13 @@ func NewClient() Client {
 	return htlcClient{}
 }
 
-func (htlc htlcClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
+func (htlc htlcClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgClaimHTLC).Type():
+	switch msg := v.(type) {
+	case *MsgClaimHTLC:
 		docMsg := DocTxMsgClaimHTLC{}
 		return docMsg.HandleTxMsg(msg), ok
-	case new(MsgCreateHTLC).Type():
+	case *MsgCreateHTLC:
 		docMsg := DocTxMsgCreateHTLC{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

@@ -12,10 +12,10 @@ func NewClient() Client {
 	return evidenceClient{}
 }
 
-func (evidence evidenceClient) HandleTxMsg(msg sdk.Msg) (MsgDocInfo, bool) {
+func (evidence evidenceClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	ok := true
-	switch msg.Type() {
-	case new(MsgSubmitEvidence).Type():
+	switch msg := v.(type) {
+	case *MsgSubmitEvidence:
 		docMsg := DocMsgSubmitEvidence{}
 		return docMsg.HandleTxMsg(msg), ok
 	default:

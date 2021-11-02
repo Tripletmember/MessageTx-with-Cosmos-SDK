@@ -17,66 +17,66 @@ func (ibc ibcClient) HandleTxMsg(v types.Msg) (MsgDocInfo, bool) {
 		msgDocInfo MsgDocInfo
 	)
 	ok := true
-	switch v.Type() {
-	case new(MsgRecvPacket).Type():
+	switch msg := v.(type) {
+	case *MsgRecvPacket:
 		docMsg := DocMsgRecvPacket{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgTransfer).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgTransfer:
 		docMsg := DocMsgTransfer{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgCreateClient).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgCreateClient:
 		docMsg := DocMsgCreateClient{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgUpdateClient).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgUpdateClient:
 		docMsg := DocMsgUpdateClient{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgUpgradeClient).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgUpgradeClient:
 		docMsg := DocMsgUpgradeClient{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgSubmitMisbehaviour).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgSubmitMisbehaviour:
 		docMsg := DocMsgSubmitMisbehaviour{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
+		msgDocInfo = docMsg.HandleTxMsg(msg)
 
-	case new(MsgConnectionOpenInit).Type():
+	case *MsgConnectionOpenInit:
 		docMsg := DocMsgConnectionOpenInit{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgConnectionOpenTry).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgConnectionOpenTry:
 		docMsg := DocMsgConnectionOpenTry{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgConnectionOpenAck).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgConnectionOpenAck:
 		docMsg := DocMsgConnectionOpenAck{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgConnectionOpenConfirm).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgConnectionOpenConfirm:
 		docMsg := DocMsgConnectionOpenConfirm{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
+		msgDocInfo = docMsg.HandleTxMsg(msg)
 
-	case new(MsgChannelOpenInit).Type():
+	case *MsgChannelOpenInit:
 		docMsg := DocMsgChannelOpenInit{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgChannelOpenTry).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgChannelOpenTry:
 		docMsg := DocMsgChannelOpenTry{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgChannelOpenAck).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgChannelOpenAck:
 		docMsg := DocMsgChannelOpenAck{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgChannelOpenConfirm).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgChannelOpenConfirm:
 		docMsg := DocMsgChannelOpenConfirm{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgChannelCloseInit).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgChannelCloseInit:
 		docMsg := DocMsgChannelCloseInit{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgChannelCloseConfirm).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgChannelCloseConfirm:
 		docMsg := DocMsgChannelCloseConfirm{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgTimeout).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgTimeout:
 		docMsg := DocMsgTimeout{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgTimeoutOnClose).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgTimeoutOnClose:
 		docMsg := DocMsgTimeoutOnClose{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
-	case new(MsgAcknowledgement).Type():
+		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *MsgAcknowledgement:
 		docMsg := DocMsgAcknowledgement{}
-		msgDocInfo = docMsg.HandleTxMsg(v)
+		msgDocInfo = docMsg.HandleTxMsg(msg)
 	default:
 		ok = false
 	}
