@@ -20,7 +20,6 @@ import (
 	"github.com/kaifei-bianjie/msg-parser/modules/service"
 	"github.com/kaifei-bianjie/msg-parser/modules/slashing"
 	"github.com/kaifei-bianjie/msg-parser/modules/staking"
-	"github.com/kaifei-bianjie/msg-parser/modules/tibc"
 	"github.com/kaifei-bianjie/msg-parser/modules/token"
 	"github.com/kaifei-bianjie/msg-parser/modules/upgrade"
 )
@@ -46,7 +45,6 @@ type MsgClient struct {
 	Record       record.Client
 	Coinswap     coinswap.Client
 	Farm         farm.Client
-	Tibc         tibc.Client
 	//Wasm         wasm.Client
 }
 
@@ -73,7 +71,6 @@ func NewMsgClient() MsgClient {
 		Token:        token.NewClient(),
 		Coinswap:     coinswap.NewClient(),
 		Farm:         farm.NewClient(),
-		Tibc:         tibc.NewClient(),
 		//Wasm:         wasm.NewClient(),
 	}
 }
