@@ -1,11 +1,13 @@
 package ibc
 
 import (
+	"fmt"
 	. "github.com/kaifei-bianjie/msg-parser/modules"
 	"github.com/kaifei-bianjie/msg-parser/utils"
 )
 
 type DocMsgAcknowledgement struct {
+	PacketId        string `bson:"packet_id"`
 	Packet          Packet `bson:"packet"`
 	Acknowledgement string `bson:"acknowledgement"`
 	ProofAcked      string `bson:"proof_acked"`
@@ -25,6 +27,8 @@ func (m *DocMsgAcknowledgement) BuildMsg(v interface{}) {
 	m.Acknowledgement = UnmarshalAcknowledgement(msg.Acknowledgement)
 	m.ProofAcked = utils.MarshalJsonIgnoreErr(msg.ProofAcked)
 	m.Packet = loadPacket(msg.Packet)
+	m.PacketId = fmt.Sprintf("%v%v%v%v%v", msg.Packet.SourcePort, msg.Packet.SourceChannel,
+		msg.Packet.DestinationPort, msg.Packet.DestinationChannel, msg.Packet.Sequence)
 
 }
 
