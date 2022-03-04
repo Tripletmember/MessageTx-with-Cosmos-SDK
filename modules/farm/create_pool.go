@@ -6,7 +6,6 @@ import (
 )
 
 type DocTxMsgCreatePool struct {
-	Name           string        `bson:"name"`
 	Description    string        `bson:"description"`
 	LptDenom       string        `bson:"lpt_denom"`
 	StartHeight    int64         `bson:"start_height"`
@@ -22,7 +21,6 @@ func (m *DocTxMsgCreatePool) GetType() string {
 
 func (m *DocTxMsgCreatePool) BuildMsg(v interface{}) {
 	msg := v.(*MsgCreatePool)
-	m.Name = msg.Name
 	m.Description = msg.Description
 	m.LptDenom = msg.LptDenom
 	m.StartHeight = msg.StartHeight

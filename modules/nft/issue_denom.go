@@ -13,6 +13,10 @@ type DocMsgIssueDenom struct {
 	Symbol           string `bson:"symbol"`
 	MintRestricted   bool   `bson:"mint_restricted"`
 	UpdateRestricted bool   `bson:"update_restricted"`
+	Description      string `bson:"description"`
+	Uri              string `bson:"uri"`
+	UriHash          string `bson:"uri_hash"`
+	Data             string `bson:"data"`
 }
 
 func (m *DocMsgIssueDenom) GetType() string {
@@ -29,6 +33,10 @@ func (m *DocMsgIssueDenom) BuildMsg(v interface{}) {
 	m.Symbol = msg.Symbol
 	m.MintRestricted = msg.MintRestricted
 	m.UpdateRestricted = msg.UpdateRestricted
+	m.Description = msg.Description
+	m.Uri = msg.Uri
+	m.UriHash = msg.UriHash
+	m.Data = msg.Data
 }
 
 func (m *DocMsgIssueDenom) HandleTxMsg(v SdkMsg) MsgDocInfo {
