@@ -6,7 +6,7 @@ import (
 )
 
 type DocTxMsgAdjustPool struct {
-	PoolName         string        `bson:"pool_name"`
+	PoolId           string        `bson:"pool_id"`
 	AdditionalReward []models.Coin `bson:"additional_reward"`
 	RewardPerBlock   []models.Coin `bson:"reward_per_block"`
 	Creator          string        `bson:"creator"`
@@ -18,7 +18,7 @@ func (m *DocTxMsgAdjustPool) GetType() string {
 
 func (m *DocTxMsgAdjustPool) BuildMsg(v interface{}) {
 	msg := v.(*MsgAdjustPool)
-	m.PoolName = msg.PoolName
+	m.PoolId = msg.PoolId
 	m.RewardPerBlock = models.BuildDocCoins(msg.RewardPerBlock)
 	m.AdditionalReward = models.BuildDocCoins(msg.AdditionalReward)
 	m.Creator = msg.Creator

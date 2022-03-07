@@ -41,12 +41,13 @@ const (
 	MsgTypeIssueDenom    = "issue_denom"
 	MsgTypeRecordCreate  = "create_record"
 
-	MsgTypeCreatePool  = "create_pool"
-	MsgTypeDestroyPool = "destroy_pool"
-	MsgTypeAdjustPool  = "adjust_pool"
-	MsgTypeStake       = "stake"
-	MsgTypeUnstake     = "unstake"
-	MsgTypeHarvest     = "harvest"
+	MsgTypeCreatePool     = "create_pool"
+	MsgTypeCreateProposal = "create_pool_with_community_pool"
+	MsgTypeDestroyPool    = "destroy_pool"
+	MsgTypeAdjustPool     = "adjust_pool"
+	MsgTypeStake          = "stake"
+	MsgTypeUnstake        = "unstake"
+	MsgTypeHarvest        = "harvest"
 
 	MsgTypeMintToken          = "mint_token"
 	MsgTypeBurnToken          = "burn_token"
@@ -165,12 +166,14 @@ type (
 	MsgIssueDenom    = nft.MsgIssueDenom
 	MsgTransferDenom = nft.MsgTransferDenom
 
-	MsgUnstake     = farm.MsgUnstake
-	MsgStake       = farm.MsgStake
-	MsgCreatePool  = farm.MsgCreatePool
-	MsgDestroyPool = farm.MsgDestroyPool
-	MsgAdjustPool  = farm.MsgAdjustPool
-	MsgHarvest     = farm.MsgHarvest
+	MsgUnstake                      = farm.MsgUnstake
+	MsgStake                        = farm.MsgStake
+	MsgCreatePool                   = farm.MsgCreatePool
+	MsgCreatePoolWithCommunityPool  = farm.MsgCreatePoolWithCommunityPool
+	MsgDestroyPool                  = farm.MsgDestroyPool
+	MsgAdjustPool                   = farm.MsgAdjustPool
+	MsgHarvest                      = farm.MsgHarvest
+	CommunityPoolCreateFarmProposal = farm.CommunityPoolCreateFarmProposal
 
 	MsgDefineService  = service.MsgDefineService
 	MsgBindService    = service.MsgBindService

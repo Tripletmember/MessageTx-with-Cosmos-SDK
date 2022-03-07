@@ -5,8 +5,8 @@ import (
 )
 
 type DocTxMsgDestroyPool struct {
-	PoolName string `bson:"pool_name"`
-	Creator  string `bson:"creator"`
+	PoolId  string `bson:"pool_id"`
+	Creator string `bson:"creator"`
 }
 
 func (m *DocTxMsgDestroyPool) GetType() string {
@@ -15,7 +15,7 @@ func (m *DocTxMsgDestroyPool) GetType() string {
 
 func (m *DocTxMsgDestroyPool) BuildMsg(v interface{}) {
 	msg := v.(*MsgDestroyPool)
-	m.PoolName = msg.PoolName
+	m.PoolId = msg.PoolId
 	m.Creator = msg.Creator
 }
 

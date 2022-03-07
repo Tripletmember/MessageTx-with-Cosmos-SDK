@@ -13,6 +13,7 @@ type DocMsgNFTMint struct {
 	URI       string `bson:"uri"`
 	Data      string `bson:"data"`
 	Name      string `bson:"name"`
+	UriHash   string `bson:"uri_hash"`
 }
 
 func (m *DocMsgNFTMint) GetType() string {
@@ -29,6 +30,7 @@ func (m *DocMsgNFTMint) BuildMsg(v interface{}) {
 	m.URI = msg.URI
 	m.Data = msg.Data
 	m.Name = msg.Name
+	m.UriHash = msg.UriHash
 }
 
 func (m *DocMsgNFTMint) HandleTxMsg(v SdkMsg) MsgDocInfo {

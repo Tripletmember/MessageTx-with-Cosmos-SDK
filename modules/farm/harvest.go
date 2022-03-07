@@ -5,8 +5,8 @@ import (
 )
 
 type DocTxMsgHarvest struct {
-	PoolName string `bson:"pool_name"`
-	Sender   string `bson:"sender"`
+	PoolId string `bson:"pool_id"`
+	Sender string `bson:"sender"`
 }
 
 func (m *DocTxMsgHarvest) GetType() string {
@@ -15,7 +15,7 @@ func (m *DocTxMsgHarvest) GetType() string {
 
 func (m *DocTxMsgHarvest) BuildMsg(v interface{}) {
 	msg := v.(*MsgHarvest)
-	m.PoolName = msg.PoolName
+	m.PoolId = msg.PoolId
 	m.Sender = msg.Sender
 }
 

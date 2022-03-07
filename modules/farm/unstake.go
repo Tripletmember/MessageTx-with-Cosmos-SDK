@@ -6,9 +6,9 @@ import (
 )
 
 type DocTxMsgUnstake struct {
-	PoolName string      `bson:"pool_name"`
-	Amount   models.Coin `bson:"amount"`
-	Sender   string      `bson:"sender"`
+	PoolId string      `bson:"pool_id"`
+	Amount models.Coin `bson:"amount"`
+	Sender string      `bson:"sender"`
 }
 
 func (m *DocTxMsgUnstake) GetType() string {
@@ -17,7 +17,7 @@ func (m *DocTxMsgUnstake) GetType() string {
 
 func (m *DocTxMsgUnstake) BuildMsg(v interface{}) {
 	msg := v.(*MsgUnstake)
-	m.PoolName = msg.PoolName
+	m.PoolId = msg.PoolId
 	m.Amount = models.BuildDocCoin(msg.Amount)
 	m.Sender = msg.Sender
 }

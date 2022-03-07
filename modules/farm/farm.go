@@ -18,6 +18,9 @@ func (farm farmClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	case *MsgCreatePool:
 		docMsg := DocTxMsgCreatePool{}
 		return docMsg.HandleTxMsg(msg), ok
+	case *MsgCreatePoolWithCommunityPool:
+		docMsg := DocTxMsgCreatePoolWithCommunityPool{}
+		return docMsg.HandleTxMsg(msg), ok
 	case *MsgDestroyPool:
 		docMsg := DocTxMsgDestroyPool{}
 		return docMsg.HandleTxMsg(msg), ok
