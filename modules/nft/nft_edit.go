@@ -34,12 +34,9 @@ func (m *DocMsgNFTEdit) BuildMsg(v interface{}) {
 }
 
 func (m *DocMsgNFTEdit) HandleTxMsg(v SdkMsg) MsgDocInfo {
-	var (
-		addrs []string
-		msg   MsgNFTEdit
-	)
+	var addrs []string
 
-	ConvertMsg(v, &msg)
+	msg := v.(*MsgNFTEdit)
 	addrs = append(addrs, msg.Sender)
 	handler := func() (Msg, []string) {
 		return m, addrs

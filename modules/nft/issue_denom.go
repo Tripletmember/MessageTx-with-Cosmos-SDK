@@ -40,12 +40,9 @@ func (m *DocMsgIssueDenom) BuildMsg(v interface{}) {
 }
 
 func (m *DocMsgIssueDenom) HandleTxMsg(v SdkMsg) MsgDocInfo {
-	var (
-		addrs []string
-		msg   MsgIssueDenom
-	)
+	var addrs []string
 
-	ConvertMsg(v, &msg)
+	msg := v.(*MsgIssueDenom)
 	addrs = append(addrs, msg.Sender)
 	handler := func() (Msg, []string) {
 		return m, addrs
