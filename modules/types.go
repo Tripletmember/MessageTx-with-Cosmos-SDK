@@ -10,6 +10,7 @@ import (
 	crisis "github.com/cosmos/cosmos-sdk/x/crisis/types"
 	distribution "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	evidence "github.com/cosmos/cosmos-sdk/x/evidence/types"
+	"github.com/cosmos/cosmos-sdk/x/feegrant"
 	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
 	slashing "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stake "github.com/cosmos/cosmos-sdk/x/staking/types"
@@ -69,6 +70,9 @@ const (
 	MsgTypeKillRequestContext        = "kill_request_context"         // type for MsgKillRequestContext
 	MsgTypeUpdateRequestContext      = "update_request_context"       // type for MsgUpdateRequestContext
 	MsgTypeWithdrawEarnedFees        = "withdraw_earned_fees"         // type for MsgWithdrawEarnedFees
+
+	MsgTypeGrantAllowance  = "grant_allowance"
+	MsgTypeRevokeAllowance = "revoke_allowance"
 
 	MsgTypeStakeCreateValidator           = "create_validator"
 	MsgTypeStakeEditValidator             = "edit_validator"
@@ -212,6 +216,9 @@ type (
 	StakeValidator                 = stake.Validator
 	Delegation                     = stake.Delegation
 	UnbondingDelegation            = stake.UnbondingDelegation
+
+	MsgGrantAllowance  = feegrant.MsgGrantAllowance
+	MsgRevokeAllowance = feegrant.MsgRevokeAllowance
 
 	MsgDeposit        = gov.MsgDeposit
 	MsgSubmitProposal = gov.MsgSubmitProposal

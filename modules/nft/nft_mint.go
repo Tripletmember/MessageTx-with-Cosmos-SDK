@@ -34,12 +34,9 @@ func (m *DocMsgNFTMint) BuildMsg(v interface{}) {
 }
 
 func (m *DocMsgNFTMint) HandleTxMsg(v SdkMsg) MsgDocInfo {
-	var (
-		addrs []string
-		msg   MsgNFTMint
-	)
+	var addrs []string
 
-	ConvertMsg(v, &msg)
+	msg := v.(*MsgNFTMint)
 	addrs = append(addrs, msg.Sender, msg.Recipient)
 	handler := func() (Msg, []string) {
 		return m, addrs

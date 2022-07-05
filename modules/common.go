@@ -34,6 +34,8 @@ func CreateMsgDocInfo(msg sdk.Msg, handler func() (Msg, []string)) MsgDocInfo {
 	}
 }
 
+// ConvertMsg
+// Deprecated, use type assertion instead of this
 func ConvertMsg(v interface{}, msg interface{}) {
 	utils.UnMarshalJsonIgnoreErr(utils.MarshalJsonIgnoreErr(v), &msg)
 }

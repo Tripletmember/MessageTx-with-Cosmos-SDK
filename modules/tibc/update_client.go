@@ -3,6 +3,7 @@ package tibc
 import (
 	cdc "github.com/kaifei-bianjie/msg-parser/codec"
 	. "github.com/kaifei-bianjie/msg-parser/modules"
+	"github.com/kaifei-bianjie/msg-parser/utils"
 )
 
 type DocMsgTIBCUpdateClient struct {
@@ -20,9 +21,11 @@ func (m *DocMsgTIBCUpdateClient) BuildMsg(v interface{}) {
 	msg := v.(*MsgTIBCUpdateClient)
 	m.ChainName = msg.ChainName
 	m.Signer = msg.Signer
-	m.Header = ConvertAny(msg.Header)
-
+	if msg.Header != nil {
+		m.Header = utils.MarshalJsonIgnoreErr(v)
+	}
 }
+
 func (m *DocMsgTIBCUpdateClient) HandleTxMsg(v SdkMsg) MsgDocInfo {
 	var (
 		addrs []string
