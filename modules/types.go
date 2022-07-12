@@ -4,6 +4,7 @@ import (
 	tibctranfer "github.com/bianjieai/tibc-go/modules/tibc/apps/nft_transfer/types"
 	tibcclient "github.com/bianjieai/tibc-go/modules/tibc/core/02-client/types"
 	tibcpacket "github.com/bianjieai/tibc-go/modules/tibc/core/04-packet/types"
+
 	//"github.com/CosmWasm/wasmd/x/wasm"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
@@ -22,6 +23,7 @@ import (
 	coinswap "github.com/irisnet/irismod/modules/coinswap/types"
 	farm "github.com/irisnet/irismod/modules/farm/types"
 	htlc "github.com/irisnet/irismod/modules/htlc/types"
+	mt "github.com/irisnet/irismod/modules/mt/types"
 	nft "github.com/irisnet/irismod/modules/nft/types"
 	oracle "github.com/irisnet/irismod/modules/oracle/types"
 	random "github.com/irisnet/irismod/modules/random/types"
@@ -41,6 +43,13 @@ const (
 	MsgTypeNFTBurn       = "burn_nft"
 	MsgTypeIssueDenom    = "issue_denom"
 	MsgTypeRecordCreate  = "create_record"
+
+	MsgTypeMTIssueDenom    = "mt_issue_denom"
+	MsgTypeMTTransferDenom = "mt_transfer_denom"
+	MsgTypeMintMT          = "mint_mt"
+	MsgTypeTransferMT      = "transfer_mt"
+	MsgTypeEditMT          = "edit_mt"
+	MsgTypeBurnMT          = "burn_mt"
 
 	MsgTypeCreatePool     = "create_pool"
 	MsgTypeCreateProposal = "create_pool_with_community_pool"
@@ -169,6 +178,13 @@ type (
 	MsgNFTBurn       = nft.MsgBurnNFT
 	MsgIssueDenom    = nft.MsgIssueDenom
 	MsgTransferDenom = nft.MsgTransferDenom
+
+	MsgMTMint          = mt.MsgMintMT
+	MsgMTEdit          = mt.MsgEditMT
+	MsgMTTransfer      = mt.MsgTransferMT
+	MsgMTBurn          = mt.MsgBurnMT
+	MsgMTIssueDenom    = mt.MsgIssueDenom
+	MsgMTTransferDenom = mt.MsgTransferDenom
 
 	MsgUnstake                      = farm.MsgUnstake
 	MsgStake                        = farm.MsgStake
