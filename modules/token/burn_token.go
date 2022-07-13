@@ -25,12 +25,9 @@ func (m *DocMsgBurnToken) BuildMsg(v interface{}) {
 }
 
 func (m *DocMsgBurnToken) HandleTxMsg(v SdkMsg) MsgDocInfo {
-	var (
-		addrs []string
-		msg   MsgBurnToken
-	)
+	var addrs []string
+	msg := v.(*MsgBurnToken)
 
-	ConvertMsg(v, &msg)
 	addrs = append(addrs, msg.Sender)
 	handler := func() (Msg, []string) {
 		return m, addrs
