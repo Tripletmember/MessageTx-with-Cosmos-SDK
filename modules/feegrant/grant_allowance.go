@@ -29,12 +29,17 @@ func (m *DocTxMsgGrantAllowance) BuildMsg(v interface{}) {
 	m.Grantee = msg.Grantee
 
 	if msg.Allowance.Value != nil {
-		var cc feegrant.BasicAllowance
-		_ = proto.Unmarshal(msg.Allowance.Value, &cc)
+		var basic feegrant.BasicAllowance
+		_ = proto.Unmarshal(msg.Allowance.Value, &basic)
+
+		var expiration int64
+		if basic.Expiration != nil {
+			expiration = basic.Expiration.Unix()
+		}
 
 		m.Allowance = &Allowance{
-			SpendLimit: models.BuildDocCoins(cc.SpendLimit),
-			Expiration: cc.Expiration.Unix(),
+			SpendLimit: models.BuildDocCoins(basic.SpendLimit),
+			Expiration: expiration,
 		}
 	}
 }
