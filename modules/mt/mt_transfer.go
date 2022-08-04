@@ -1,6 +1,7 @@
 package mt
 
 import (
+	"fmt"
 	. "github.com/kaifei-bianjie/msg-parser/modules"
 	"strings"
 )
@@ -9,7 +10,7 @@ type (
 	DocMsgMTransfer struct {
 		Id        string `bson:"id"`
 		DenomId   string `bson:"denom_id"`
-		Amount    uint64 `bson:"amount"`
+		Amount    string `bson:"amount"`
 		Sender    string `bson:"sender"`
 		Recipient string `bson:"recipient"`
 	}
@@ -24,7 +25,7 @@ func (m *DocMsgMTransfer) BuildMsg(v interface{}) {
 
 	m.Id = strings.ToLower(msg.Id)
 	m.DenomId = strings.ToLower(msg.DenomId)
-	m.Amount = msg.Amount
+	m.Amount = fmt.Sprint(msg.Amount)
 	m.Sender = msg.Sender
 	m.Recipient = msg.Recipient
 }

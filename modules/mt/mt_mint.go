@@ -1,6 +1,7 @@
 package mt
 
 import (
+	"fmt"
 	. "github.com/kaifei-bianjie/msg-parser/modules"
 	"strings"
 )
@@ -8,7 +9,7 @@ import (
 type DocMsgMTMint struct {
 	Id        string `bson:"id"` // need get from events
 	DenomId   string `bson:"denom_id"`
-	Amount    uint64 `bson:"amount"`
+	Amount    string `bson:"amount"`
 	Data      string `bson:"data"`
 	Sender    string `bson:"sender"`
 	Recipient string `bson:"recipient"`
@@ -22,7 +23,7 @@ func (m *DocMsgMTMint) BuildMsg(v interface{}) {
 	msg := v.(*MsgMTMint)
 
 	m.DenomId = strings.ToLower(msg.DenomId)
-	m.Amount = msg.Amount
+	m.Amount = fmt.Sprint(msg.Amount)
 	m.Data = string(msg.Data)
 	m.Sender = msg.Sender
 	m.Recipient = msg.Recipient
