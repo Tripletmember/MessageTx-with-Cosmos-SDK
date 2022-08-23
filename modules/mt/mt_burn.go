@@ -8,10 +8,10 @@ import (
 
 type (
 	DocMsgMTBurn struct {
-		Sender string `bson:"sender"`
-		Id     string `bson:"id"`
-		Amount string `bson:"amount"`
-		Denom  string `bson:"denom"`
+		Sender  string `bson:"sender"`
+		Id      string `bson:"id"`
+		Amount  string `bson:"amount"`
+		DenomId string `bson:"denom_id"`
 	}
 )
 
@@ -25,7 +25,7 @@ func (m *DocMsgMTBurn) BuildMsg(v interface{}) {
 	m.Sender = msg.Sender
 	m.Id = strings.ToLower(msg.Id)
 	m.Amount = fmt.Sprint(msg.Amount)
-	m.Denom = strings.ToLower(msg.DenomId)
+	m.DenomId = strings.ToLower(msg.DenomId)
 }
 
 func (m *DocMsgMTBurn) HandleTxMsg(v SdkMsg) MsgDocInfo {
