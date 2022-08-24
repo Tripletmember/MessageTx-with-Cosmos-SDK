@@ -22,6 +22,7 @@ func (m *DocMsgMTMint) GetType() string {
 func (m *DocMsgMTMint) BuildMsg(v interface{}) {
 	msg := v.(*MsgMTMint)
 
+	m.Id = strings.ToLower(msg.Id)
 	m.DenomId = strings.ToLower(msg.DenomId)
 	m.Amount = fmt.Sprint(msg.Amount)
 	m.Data = string(msg.Data)
