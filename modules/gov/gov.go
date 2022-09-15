@@ -24,6 +24,9 @@ func (gov govClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	case *MsgDeposit:
 		docMsg := DocTxMsgDeposit{}
 		return docMsg.HandleTxMsg(msg), ok
+	case *MsgVoteWeighted:
+		docMsg := DocTxMsgVoteWeighted{}
+		return docMsg.HandleTxMsg(msg), ok
 	default:
 		ok = false
 	}
